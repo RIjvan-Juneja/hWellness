@@ -1,0 +1,19 @@
+{
+  "name": "hwellness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RIjvan-Juneja/hWellness.git"
+  },
+  "author": "Rijvan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RIjvan-Juneja/hWellness/issues"
+  },
+  "homepage": "https://github.com/RIjvan-Juneja/hWellness#readme"
+}
