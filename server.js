@@ -8,6 +8,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use(express.json())
 
 app.set('view engine', 'ejs');

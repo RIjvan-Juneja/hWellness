@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/backgrounds/logo-transparent-red.png">
+	<title>KartEzy - Login</title>
+	<link href="/bootstrap/bootstrap.css" rel="stylesheet">
+	<script src="/sweetalert2/sweetalert2.min.js"></script>
+	<link href="/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+	<style>
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh
+		}
+
+		.container {
+			border-radius: 15px;
+			box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+			margin: auto;
+		}
+	</style>
+	<script src="/js/authentication/validation.js"></script>
+	<script src="/js/authentication/timer.js"></script>
+	<script src="/js/authentication/islogin.js"></script>
+</head>
+
+<body>
+	<div class="d-flex container" style="width: fit-content;">
+		<div class="m-auto d-none d-sm-block" style="width: 400px;">
+			<img src="/images/backgrounds/background1.gif" width="100%" height="auto">
+		</div>
+		<form id='login_form' onchange="return isValidLogin()">
+			<div class="p-4">
+				<div class="row">
+					<div class="col mb-3">
+						<h1 class="text-primary text-center">Sign In</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col mb-3">
+						<label class="text-primary" for="userName">Email ID / Mobile No. : </label>
+						<input tabindex="1" type="text" name="userName" id="userName" placeholder="Email id / mobile no" class="form-control border-primary">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col mb-3">
+						<label class="text-primary" for="password">Password : </label>
+						<input type="password" tabindex="2" name="password" id="password" placeholder="Password" class="form-control border-primary">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col mb-3">
+						<input type="button" tabindex="3" class="btn btn-primary w-100" value="Sign In" onclick="return isLogin()">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col mb-3">
+						<input type="reset" tabindex="4" class="btn btn-outline-danger w-100" value="Clear">
+					</div>
+				</div>
+
+				<div class="row">	
+					<div class="col mb-3 col text-center">
+						<a href="/kartezy/forgetPassword" tabindex="5">Forget Password</a><br>
+						<a href="/kartezy/register" tabindex="5">Create New Account?</a><br>
+						<a href="/kartezy" tabindex="6">Back</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
