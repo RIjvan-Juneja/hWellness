@@ -1,0 +1,24 @@
+const express = require("express");
+const useRouter = require('./routes/router.js');
+const path = require('path');
+const PORT = process.env.PORT || 8080;
+const HOST = process.env.HOST || 'localhost';
+require('dotenv').config();
+
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json())
+
+app.set('view engine', 'ejs');
+app.use("/",useRouter);  
+
+app.listen(PORT, (err)=>{
+    if(err){
+        console.log("connection error");
+    } else {
+        console.log(`Server is : http://${HOST}:${PORT}/hWellness`);
+    }
+})
+
+
