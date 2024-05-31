@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use(cookieParser()); 
+app.set('trust proxy', true);
 app.set('view engine', 'ejs');
 app.use("/",useRouter);
 

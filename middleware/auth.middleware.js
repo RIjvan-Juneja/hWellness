@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const db = require('../models/index');
 
 const authMiddleware = async (req, res, next) => {
   const token = req.cookies.jwt;
@@ -9,10 +9,11 @@ const authMiddleware = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret');
-    const user = await User.findByPk(decoded.id);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'Rijvan1116c');
+    const user = await db.User.findByPk(decoded.id);
+    const session_token = await db.Session.findOne({ where: { session_token : decoded.session_token } });
     
-    if (user) {
+    if (user && session_token) {
       req.user = user; 
       next(); 
     } else {

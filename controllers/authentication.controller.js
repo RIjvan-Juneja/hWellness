@@ -47,23 +47,28 @@ const login = async (req, res) => {
     if (!user || (await bcrypt.compare(password, user.password_hash))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     } else {
-      // const sessionToken = uuidv4();
-      // user.sessionToken = sessionToken;
-      // await user.save();
-  
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
-      console.log(token);
+      
+      let payload = { 
+        id: user.id,
+        session_token : functions.randomString(6)
+      }
+
+      const token = jwt.sign(payload, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
       res.cookie('jwt', token, {
-        httpOnly: true, // HTTP-only flag to prevent JavaScript access
-        secure: process.env.NODE_ENV === 'production', // Secure flag to send the cookie only over HTTPS
+        httpOnly: true, 
         maxAge: 3600000 // 1 hour expiration
       });
-      
-      res.json({ message: 'Login successful', token });
+
+      db.Session.create({
+        user_id : payload.id, 
+        device_info : req.ip,
+        session_token : payload.session_token
+      });
+      res.status(200).send({ status: 'ok' });
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json({ error: error.message });
+    res.status(400).send({ status: "Internal Server error",  msg: "An unexpected error occurred while processing your request"});
   }
 };
 

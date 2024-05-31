@@ -25,10 +25,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       },
-      is_logged:{
-        type: Sequelize.INTEGER,
-        defaultValue: 1
-      },
+      session_token: Sequelize.STRING,
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
