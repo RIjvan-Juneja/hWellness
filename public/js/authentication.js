@@ -3,14 +3,14 @@ const loginBtn = document.querySelector('#signUpBtn');
 loginBtn.addEventListener('click',async ()=>{
   const form = document.querySelector('#signUpForm');
   let formData = new FormData(form);
-  // console.log(formData);
+  let userData = new URLSearchParams(formData);
   
   try {
     const response = await fetch('/api/registation', {
       method: 'POST',
-      body: formData,
+      body: userData,
       headers: {
-        'Content-Type': 'multipart/form-data' // Set Content-Type to multipart/form-data
+        'Content-Type': "application/x-www-form-urlencoded",
       }
     });
     const resData = await response.json();
