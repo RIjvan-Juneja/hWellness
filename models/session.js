@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
-    logged_out_at: DataTypes.DATE,
+    is_logged:{
+      type: DataTypes.INTEGER,
+      defaultValue: 1
+    },
     updated_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
