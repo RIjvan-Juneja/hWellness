@@ -11,10 +11,9 @@ router.get('/registation',authentication.renderRegistation);
 router.post('/api/registation',authentication.registation);
 router.post('/api/login',authentication.login);
 
-
  // ==================== user ===================== // 
 router.get('/medication',medication.renderMedication);
-router.get('/medication/add',medication.renderMedicationForm);
+router.get('/medication/add',authMiddleware,medication.renderMedicationForm);
 
 
 

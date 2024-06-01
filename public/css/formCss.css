@@ -1,0 +1,30 @@
+.content {
+  display: none;
+}
+
+.active-tab {
+  display: block;
+}
+
+.time-picker {
+  position: relative;
+  /* display: inline-block; */
+}
+
+.time-picker-dropdown {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  padding: 10px;
+}
+
+.time-picker-dropdown.show {
+  display: block;
+}
+
+.time-picker-dropdown select {
+  margin-bottom: 5px;
+}

@@ -14,16 +14,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/main.css" />
-
-  <style>
-    .content {
-      display: none;
-    }
-
-    .active-tab {
-      display: block;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/formCss.css" />
 
 </head>
 
@@ -41,7 +32,7 @@
             <!-- breadcrumb for path  -->
             <nav aria-label="breadcrumb my-4">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/medications">Medications</a></li>
+                <li class="breadcrumb-item"><a href="/medication">Medications</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add Medication</li>
               </ol>
             </nav>
@@ -53,49 +44,144 @@
             <ul class="nav nav-pills" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" id="pill-tab-0" data-bs-toggle="pill" href="#pill-tabpanel-0" role="tab"
-                  aria-controls="pill-tabpanel-0" aria-selected="true">One Time Only</a>
+                  aria-controls="pill-tabpanel-0" aria-selected="true">Recurring</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="pill-tab-1" data-bs-toggle="pill" href="#pill-tabpanel-1" role="tab"
-                  aria-controls="pill-tabpanel-1" aria-selected="false">Tab 2</a>
+                  aria-controls="pill-tabpanel-1" aria-selected="false">One Time Only </a>
               </li>
 
             </ul>
             <div class="tab-content py-3 mt-2">
+
+              <!--  one time only form -->
               <div class="tab-pane active" id="pill-tabpanel-0" role="tabpanel" aria-labelledby="pill-tab-0">
                 <div class="p-2 bg-white shadow-sm rounded">
                   <div class="m-4">
-                    <div class="row g-3">
-                      <h5>One Time Only</h5>
-                      <div class="col-4">
-                        <label for="productName" class="form-label">Date :</label>
-                        <input type="date" class="form-control" placeholder="Product Name" id="productName"
-                          name="productName">
-                        <span class="productNameError errorSpan"></span>
-                      </div>
+                    <form id="RecurringForm">
+                      <div class="row g-3">
+                        <h5>Recurring</h5>
 
-                      <div class="col-4">
-                        <label for="productName" class="form-label">Date :</label>
-                        <input type="date" class="form-control" placeholder="Product Name" id="productName"
-                          name="productName">
-                        <span class="productNameError errorSpan"></span>
+                        <div class="col-4">
+                          <label for="routing" class="form-label">Select Routing </label>
+                          <select class="form-select" id="routing" name="routing">
+                            <option value="">select.....</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                          </select>
+                          <span class="routingError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="time" class="form-label">Time</label>
+                          <input type="text" class="form-control" placeholder="Time in 24 hours" id="time" name="time">
+                          <span class="timeError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="day" class="form-label" id="dayLable">Day </label>
+                          <select class="form-select" id="day" name="day">
+                            <option value="">Select.....</option>
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                            <option value="sunday">Sunday</option>
+                          </select>
+                          <span class="dayError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="otoData" class="form-label">Start Date </label>
+                          <input type="date" class="form-control" placeholder="start date" id="startDate" name="start_date">
+                          <span class="startDateError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="otoData" class="form-label">End Date </label>
+                          <input type="date" class="form-control" placeholder="end date" id="endDate" name="end_date">
+                          <span class="endDateError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="image" class="form-label">Image </label>
+                          <input class="form-control" type="file" name="image" id="rImage">
+                          <span class="rImageError errorSpan"></span>
+                        </div>
+
                       </div>
-                    </div>
+                      <div class="row">
+                        <div class="col text-end">
+                          <button type="button" id="recurringBtn" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
+              </div>
 
+              <!-- Recurring form -->
+              <div class="tab-pane" id="pill-tabpanel-1" role="tabpanel" aria-labelledby="pill-tab-1">
+                <div class="p-2 bg-white shadow-sm rounded">
+                  <div class="m-4">
+                    <form id="otoForm">
+                      <div class="row g-3">
+                        <h5>One Time Only</h5>
+
+                        <div class="col-4">
+                          <label for="otoData" class="form-label">Date </label>
+                          <input type="date" class="form-control" placeholder="Product Name" id="otoData"
+                            name="productName">
+                          <span class="otoDataError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="timePickerInput" class="form-label">Select Time</label>
+                          <div class="input-group time-picker">
+                            <input type="text" class="form-control" placeholder="Time In 24 hours" name="oto_time"
+                              id="timePickerInput" readonly />
+                            <span class="input-group-text" id="timePickerButton">
+                              <i class="bi bi-clock"></i>
+                            </span>
+                            <div class="time-picker-dropdown" id="timePickerDropdown">
+                              <select id="hours" class="form-select">
+                                <!-- Hours options will be populated by JavaScript -->
+                              </select>
+                              <select id="minutes" class="form-select">
+                                <!-- Minutes options will be populated by JavaScript -->
+                              </select>
+                              <button class="btn btn-primary" id="setTimeButton">Set Time</button>
+                            </div>
+                          </div>
+                          <span class="productNameError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
+                          <label for="image" class="form-label">Image </label>
+                          <input class="form-control" type="file" name="image" id="image">
+                          <span class="imageError errorSpan"></span>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col text-end">
+                          <button type="button" class="btn btn-primary" id="otoBtn">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <div class="tab-pane" id="pill-tabpanel-1" role="tabpanel" aria-labelledby="pill-tab-1">Tab 2 content
-              </div>
+
             </div>
-
           </div>
       </div>
   </div>
   <!-- /#page-content-wrapper -->
 
-
-
+  <script src="/js/formJs.js"></script>
   <script src="/js/main.js"></script>
   <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 

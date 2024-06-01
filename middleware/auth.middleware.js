@@ -11,9 +11,10 @@ const authMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'Rijvan1116c');
     const user = await db.User.findByPk(decoded.id);
+    console.log();
     const session_token = await db.Session.findOne({ where: { session_token : decoded.session_token } });
     if (user && session_token) {
-      req.user = { id: decoded.id, session_token : decoded.session_token };
+      req.user = { id: decoded.id, userName: user.dataValues.first_name + ' ' + user.dataValues.last_name, session_token : decoded.session_token };
       next(); 
     } else {
       res.clearCookie('jwt');
