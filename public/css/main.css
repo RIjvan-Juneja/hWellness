@@ -2,7 +2,7 @@
       --main-bg-color: #f5f5f9;
       --main-text-color: #5D87FF;
       --second-text-color: #bbbec5;
-      --second-bg-color: #ffe6eaa3;
+      --second-bg-color: #e6ecffd4;
     }
 
     .bg-red {
@@ -165,7 +165,10 @@
       font-size: 14px;
       margin: 3px;
     }
-
+    #logoh{
+      font-size: 33px !important;
+  padding: 16px 0px !important;
+    }
     /* .icon-admin{
   background: #bbbec5;
   border-radius: 5px;

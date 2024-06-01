@@ -7,7 +7,7 @@ toggleButton.onclick = function () {
 
 // for admin header heading change
 const sideHeading = document.querySelector(".side-heading");
-const path = new URL(location.href).pathname.split("/")[3];
+const path = new URL(location.href).pathname.split("/")[1];
 sideHeading.innerHTML = path;
 
 // for sidebar active class change
