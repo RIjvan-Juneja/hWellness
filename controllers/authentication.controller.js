@@ -1,5 +1,6 @@
 const sendMail = require("../services/sendMail");
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 const functions = require("../helpers/functions");
 const bcrypt = require('bcryptjs');
 const db = require("../models/index");
@@ -82,8 +83,24 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  
+  res.clearCookie('jwt'); 
+  res.redirect('/login');
 }
 
+const logoutFromAll = async (req, res) => {
+  try{
+    await db.Session.update({ session_token : ''},{
+      where: {
+        session_token : {
+          [op.ne] : req.user.session_token
+        }
+      },
+    });
+    res.status(200).send({ status: 'ok' });
 
-module.exports = { renderRegistation, renderLogin, registation, login,renderDashboard };
+  }catch(err){
+    res.status(500).sen({status "Internal Server Error", msg: "Unexpected error on server"});
+    console.log(err);
+  }
+}
+module.exports = { renderRegistation, renderLogin, registation, login,renderDashboard, logout, logoutFromAll};

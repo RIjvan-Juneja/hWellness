@@ -3,11 +3,11 @@ const db = require('../models/index');
 const sendEmail = require('../services/sendMail');
 const { Op } = require('sequelize');
 
-// const getUserEmailById = async (userId) => {
-//   // Implement logic to fetch user email by userId
-//   const user = await User.findByPk(userId);
-//   return user.email;
-// };
+const getUserEmailById = async (userId) => {
+  // Implement logic to fetch user email by userId
+  const user = await User.findByPk(userId);
+  return user.email;
+};
 
 // This cron job runs every minute
 cron.schedule('* * * * *', async () => {
@@ -22,12 +22,12 @@ cron.schedule('* * * * *', async () => {
   const oneTimeMedications = await db.Medication.findAll({
     where: {
       start_date: {
-        [Op.lte]: currentDate
+        [Op.lte]: currentDate + ' 00:00:00'
       },
       end_date: {
-        [Op.gte]: currentDate
+        [Op.gte]: currentDate + ' 00:00:00'
       },
-      time: currentTime
+      time: currentTime + ':00'
     }
   });
 
@@ -35,9 +35,9 @@ cron.schedule('* * * * *', async () => {
   const dailyMedications = await db.Medication.findAll({
     where: {
       recurrence: 'daily',
-      time: currentTime,
-      start_date: { [Op.lte]: currentDate },
-      end_date: { [Op.gte]: currentDate }
+      time: currentTime + ':00',
+      start_date: { [Op.lte]: currentDate + ' 00:00:00' },
+      end_date: { [Op.gte]: currentDate + ' 00:00:00' }
     }
   });
 
@@ -46,16 +46,16 @@ cron.schedule('* * * * *', async () => {
     where: {
       recurrence: 'weekly',
       day_of_week: currentDay,
-      time: currentTime,
-      start_date: { [Op.lte]: currentDate },
-      end_date: { [Op.gte]: currentDate }
+      time: currentTime + ':00',
+      start_date: { [Op.lte]: currentDate + ' 00:00:00' },
+      end_date: { [Op.gte]: currentDate + ' 00:00:00' }
     }
   });
 
   const allMedications = [...oneTimeMedications, ...dailyMedications, ...weeklyMedications];
   console.log(allMedications);
-  for (const medication of allMedications) {
-    // const userEmail = await getUserEmailById(medication.user_id);
-    sendEmail(userEmail, 'Medication Reminder', `It's time to take your medication.`);
-  }
+  // for (const medication of allMedications) {
+  //   // const userEmail = await getUserEmailById(medication.user_id);
+  //   sendEmail(userEmail, 'Medication Reminder', `It's time to take your medication.`);
+  // }
 });
