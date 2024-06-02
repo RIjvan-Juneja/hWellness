@@ -5,6 +5,7 @@ router.use(passport.initialize());
 const authentication = require("../controllers/authentication.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 const medication = require("../controllers/medication.controller");
+const parser = require("../middleware/cloudinaryFileUpload");
 
 router.get('/login',authentication.renderLogin);
 router.get('/registation',authentication.renderRegistation);
@@ -14,7 +15,6 @@ router.post('/api/login',authentication.login);
  // ==================== user ===================== // 
 router.get('/medication',medication.renderMedication);
 router.get('/medication/add',authMiddleware,medication.renderMedicationForm);
-
-
+router.post('/medication/api/add',authMiddleware,parser,medication.addMedication);
 
 module.exports = router;
