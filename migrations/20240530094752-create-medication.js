@@ -17,16 +17,7 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      description: {
-        type: Sequelize.STRING
-      },
       file_path: {
-        type: Sequelize.STRING
-      },
-      type: {
         type: Sequelize.STRING
       },
       start_date: {

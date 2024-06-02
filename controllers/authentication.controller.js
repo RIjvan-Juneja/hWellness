@@ -8,6 +8,10 @@ const renderRegistation = (req, res) => {
   res.render("pages/registation.ejs");
 }
 
+const renderDashboard = (req, res) => {
+  res.render("pages/dashboard.ejs", { user : req.user});
+}
+
 const renderLogin = (req, res) => {
   res.render("pages/login.ejs");
 }
@@ -77,4 +81,4 @@ const logout = async (req, res) => {
 }
 
 
-module.exports = { renderRegistation, renderLogin, registation, login };
+module.exports = { renderRegistation, renderLogin, registation, login,renderDashboard };

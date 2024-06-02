@@ -11,10 +11,11 @@ router.get('/login',authentication.renderLogin);
 router.get('/registation',authentication.renderRegistation);
 router.post('/api/registation',authentication.registation);
 router.post('/api/login',authentication.login);
+router.get('/dashboard',authMiddleware,authentication.renderDashboard);
 
- // ==================== user ===================== // 
+// ==================== user ===================== //
 router.get('/medication',medication.renderMedication);
 router.get('/medication/add',authMiddleware,medication.renderMedicationForm);
-router.post('/medication/api/add',authMiddleware,parser,medication.addMedication);
+router.post('/medication/api/add',authMiddleware,parser.parser.single('image'),medication.addMedication);
 
 module.exports = router;

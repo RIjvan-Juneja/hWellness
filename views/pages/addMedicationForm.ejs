@@ -54,11 +54,11 @@
             </ul>
             <div class="tab-content py-3 mt-2">
 
-              <!--  one time only form -->
+              <!-- Recurring form -->
               <div class="tab-pane active" id="pill-tabpanel-0" role="tabpanel" aria-labelledby="pill-tab-0">
                 <div class="p-2 bg-white shadow-sm rounded">
                   <div class="m-4">
-                    <form id="RecurringForm">
+                    <form id="recurringForm">
                       <div class="row g-3">
                         <h5>Recurring</h5>
 
@@ -122,7 +122,7 @@
                 </div>
               </div>
 
-              <!-- Recurring form -->
+              <!--  one time only form -->
               <div class="tab-pane" id="pill-tabpanel-1" role="tabpanel" aria-labelledby="pill-tab-1">
                 <div class="p-2 bg-white shadow-sm rounded">
                   <div class="m-4">
@@ -131,16 +131,15 @@
                         <h5>One Time Only</h5>
 
                         <div class="col-4">
-                          <label for="otoData" class="form-label">Date </label>
-                          <input type="date" class="form-control" placeholder="Product Name" id="otoData"
-                            name="productName">
-                          <span class="otoDataError errorSpan"></span>
+                          <label for="otoDate" class="form-label">Date </label>
+                          <input type="date" class="form-control" id="otoDate" name="start_date">
+                          <span class="otoDateError errorSpan"></span>
                         </div>
 
                         <div class="col-4">
                           <label for="timePickerInput" class="form-label">Select Time</label>
                           <div class="input-group time-picker">
-                            <input type="text" class="form-control" placeholder="Time In 24 hours" name="oto_time"
+                            <input type="text" class="form-control" placeholder="Time In 24 hours" name="time"
                               id="timePickerInput" readonly />
                             <span class="input-group-text" id="timePickerButton">
                               <i class="bi bi-clock"></i>
@@ -152,7 +151,7 @@
                               <select id="minutes" class="form-select">
                                 <!-- Minutes options will be populated by JavaScript -->
                               </select>
-                              <button class="btn btn-primary" id="setTimeButton">Set Time</button>
+                              <button class="btn btn-primary" type="button" id="setTimeButton">Set Time</button>
                             </div>
                           </div>
                           <span class="productNameError errorSpan"></span>

@@ -10,14 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Medication.init({
     user_id: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
     file_path: DataTypes.STRING,
-    type: DataTypes.STRING,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
     time: DataTypes.TIME,
-    recurrence: DataTypes.STRING,
+    recurrence: DataTypes.STRING,  // daily or weekly
     day_of_week: DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
