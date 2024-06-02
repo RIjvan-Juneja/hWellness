@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     file_path: DataTypes.STRING,
     start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE,
+    end_date: DataTypes.DATE, // if only one time thant start_date = end_date
     time: DataTypes.TIME,
     recurrence: DataTypes.STRING,  // daily or weekly
-    day_of_week: DataTypes.STRING,
+    day_of_week: DataTypes.STRING, // if weekly then day (mon,tue,fri....)
     created_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW

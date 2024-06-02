@@ -51,8 +51,9 @@ if(document.querySelector("#signInBtn")){
       const resData = await response.json();
       if(response.status === 200){
         console.log(resData);
+        window.location.href = "/dashboard";
       } else {
-        alert(response.status);
+        alert("invalid Username or Password");
       }
     } catch (error) {
       alert(error);

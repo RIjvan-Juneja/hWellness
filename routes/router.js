@@ -6,7 +6,7 @@ const authentication = require("../controllers/authentication.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 const medication = require("../controllers/medication.controller");
 const parser = require("../middleware/cloudinaryFileUpload");
-
+require("../controllers/notification")
 router.get('/login',authentication.renderLogin);
 router.get('/registation',authentication.renderRegistation);
 router.post('/api/registation',authentication.registation);

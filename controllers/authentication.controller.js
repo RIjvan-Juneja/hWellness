@@ -13,7 +13,11 @@ const renderDashboard = (req, res) => {
 }
 
 const renderLogin = (req, res) => {
-  res.render("pages/login.ejs");
+  if(typeof  req.cookies.jwt != "undefined")  {
+    return res.redirect('/dashboard'); 
+  }else {
+    res.render("pages/login.ejs");
+  }
 }
 
 const registation = async (req, res) => {
@@ -47,8 +51,9 @@ const login = async (req, res) => {
   const { username } = req.body;
   try {
     const user = await db.User.findOne({ where: { email : username } });
-    let password = 'c2b58cdfdb6bb5ba4cadd6d7f2e12257'
-    if (!user || (await bcrypt.compare(password, user.password_hash))) {
+    let password = functions.encryptString(user.dataValues.salt  + req.body.password);
+    
+    if (!user || !(user.dataValues.password_hash == password)) {
       return res.status(401).json({ message: 'Invalid credentials' });
     } else {
       
