@@ -16,3 +16,22 @@ list.forEach(el => {
   el.classList.remove("active");
 });
 document.querySelector(`#${path.toLowerCase()}`).classList.add("active");
+
+document.querySelector("#logoutAll").addEventListener("click", async ()=>{
+  try {
+    const response = await fetch('/logout/all', {
+        method: 'POST',
+        body: ''
+    });
+
+    const resData = await response.json();
+    if (response.status === 200) {
+        alert("All Divice logout successful");
+    } else {
+        alert("All Divice logout Failed");
+        console.log(resData);
+    }
+} catch (error) {
+    console.log(error);
+}
+});

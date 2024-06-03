@@ -91,15 +91,14 @@ const logoutFromAll = async (req, res) => {
   try{
     await db.Session.update({ session_token : ''},{
       where: {
-        session_token : {
-          [op.ne] : req.user.session_token
-        }
+        session_token : { [Op.ne] : req.user.session_token },
+        user_id : req.user.id
       },
     });
     res.status(200).send({ status: 'ok' });
 
   }catch(err){
-    res.status(500).sen({status "Internal Server Error", msg: "Unexpected error on server"});
+    res.status(500).send({status : "Internal Server Error", msg: "Unexpected error on server"});
     console.log(err);
   }
 }

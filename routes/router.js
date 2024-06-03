@@ -14,14 +14,12 @@ router.get('/registation',authentication.renderRegistation);
 router.post('/api/registation',authentication.registation);
 router.post('/api/login',authentication.login);
 router.get('/dashboard',authMiddleware,authentication.renderDashboard);
-router.post('/logout',authentication.logout);
-router.post('/logout/all',authentication.logoutFromAll);
+router.get('/logout',authMiddleware,authentication.logout);
+router.post('/logout/all',authMiddleware,authentication.logoutFromAll);
 
 // ==================== user ===================== //
 router.get('/medication',medication.renderMedication);
 router.get('/medication/add',authMiddleware,medication.renderMedicationForm);
 router.post('/medication/api/add',authMiddleware,parser.parser.single('image'),medication.addMedication);
-
-
 
 module.exports = router;
