@@ -170,6 +170,16 @@
       font-size: 30px !important;
       padding: 20px 0px !important;
     }
+    .preloader{
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      background: #5d88ff41;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
 
     /* .icon-admin{
       background: #bbbec5;

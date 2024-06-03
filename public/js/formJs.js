@@ -14,6 +14,8 @@ document.querySelector("#routing").addEventListener('change', (event) => {
 
 // ===== Sumbit data of form(Only one time,Reccurring form) ====== //
 const addMedication = async (formId,formType) => {
+    const loader = document.querySelector('.preloader');
+    loader.style.display = 'flex';
     const form = document.querySelector(`#${formId}`);
     const formData = new FormData(form);
     if(formType == 'oto'){
@@ -29,13 +31,16 @@ const addMedication = async (formId,formType) => {
         });
         const resData = await response.json();
         if (response.status === 200) {
+            loader.style.display = 'none';
             console.log(resData);
             form.reset();
             alert("Sucessfully added");
         } else {
+            loader.style.display = 'none';
             console.log(resData);
         }
     } catch (error) {
+        loader.style.display = 'none';
         console.log(error);
     }
 }
