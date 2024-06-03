@@ -23,10 +23,9 @@ const generateReportForUser = async (user) => {
         }
     });
 
-    console.log(reportData);
-
-    let date = new Date();
-    const csvFileName = `report.csv`
+    const date = new Date();
+    const currentDate = date.toISOString().split('T')[0]; 
+    const csvFileName = `${user.id}_${currentDate}_report.csv`
     const csvFilePath = path.join(__dirname, '..', 'reports', csvFileName);
 
     const csvWriter = createCsvWriter({
@@ -54,11 +53,14 @@ const generateReportForUser = async (user) => {
 
 // Define the job processing function
 async function processReportJob(job) {
+    const date = new Date();
+    const currentDate = date.toISOString().split('T')[0]; 
     let { user } = job.data;
     const { csvFilePath, csvFileName } = await generateReportForUser(user);
     console.log("file name: ", csvFileName, " file path: ", csvFilePath);
-    // await mailService(user.email, 'Your Weekly Report', 'Report from thisDate to thisDate', null, csvFilePath, csvFileName);
-    // fs.unlinkSync(csvFilePath);
+    await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generatred at ${currentDate}`, null, csvFilePath);
+    await mailService(user.email, 'Your Weekly Report', 'Report from thisDate to thisDate', null, csvFilePath, csvFileName);
+    fs.unlinkSync(csvFilePath);
 }
 
 const worker = new Worker('report-generation', processReportJob, { connection: redisConnection });
@@ -72,7 +74,8 @@ async function getUsers() {
     return users;
 }
 
-const schedule = cron.schedule('* * * * *', async () => {
+// At 07:00 on every  Sunday.
+const schedule = cron.schedule('0 7 * * 0', async () => {
     const users = await getUsers();
     users.forEach(user => {
         reportQueue.add('generate-report', { user });
@@ -81,11 +84,3 @@ const schedule = cron.schedule('* * * * *', async () => {
 });
 
 schedule.start();
-// Error: connect ECONNREFUSED 127.0.0.1:6379
-//     at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1605:16) {
-//   errno: -111,
-//   code: 'ECONNREFUSED',
-//   syscall: 'connect',
-//   address: '127.0.0.1',
-//   port: 6379
-// }

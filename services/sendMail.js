@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
+const path = require('path');
 
-const sendEmail = async (to, subject, text, html, attachments) => {
+
+const sendEmail = async (to, subject, text, html, attachments_path) => {
   // Create a transporter object using the default SMTP transport
   try {
     let transporter = nodemailer.createTransport({
@@ -10,6 +12,10 @@ const sendEmail = async (to, subject, text, html, attachments) => {
         pass: process.env.EMAIL_PASS 
       }
     });
+    let filename;
+    if(attachments_path){
+      filename = path.basename(attachments_path);
+    }
   
     let mailOptions = {
       from: process.env.EMAIL_USER, // Sender address
@@ -17,8 +23,14 @@ const sendEmail = async (to, subject, text, html, attachments) => {
       subject: subject,             // Subject line
       text: text,                   // Plain text body
       html: html,                   // HTML body
-      attachments: attachments      // Attachments array
+      attachments: [
+        {
+            filename: filename,
+            path: attachments_path,
+        }
+      ]      
     };
+    
   
     // Send mail with defined transport object
     transporter.sendMail(mailOptions, (error, info) => {
