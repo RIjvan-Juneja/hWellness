@@ -49,7 +49,7 @@ const addMedication = async (req, res) => {
 const displayMedication = async (req,res) => {
   try {
     const medications = await db.Medication.findAll({
-      attributes : ['file_path','start_date', 'end_date','time', 'recurrence', 'day_of_week'],
+      attributes : [['file_path', 'image'],'start_date', 'end_date','time', 'recurrence', 'day_of_week'],
       where : {
         user_id : req.user.id || 0
       }
