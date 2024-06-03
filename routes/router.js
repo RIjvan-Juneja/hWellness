@@ -7,6 +7,7 @@ const authMiddleware = require("../middleware/auth.middleware");
 const medication = require("../controllers/medication.controller");
 const parser = require("../middleware/cloudinaryFileUpload");
 require("../controllers/notification")
+require("../controllers/worker")
 
 // =============== authentication =================//
 router.get('/login',authentication.renderLogin);
