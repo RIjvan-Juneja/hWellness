@@ -24,13 +24,62 @@
       <div id="page-content-wrapper" class="vh-100 overflow-scroll">
         <%- include('../components/header.ejs'); %>
         <div class="container-fluid px-4">
-          Dashboard
+          <div class="row g-3 my-2 dashboardCounter"><div class="col-md-3">
+            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                <div>
+                    <h3 class="fs-2">1</h3>
+                    <p class="fs-5">Products</p>
+                </div>
+                <i class="bi bi-box2 fs-1 primary-text border rounded-full  dashboard-count"></i>
+            </div>
+            </div>
+        
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div>
+                        <h3 class="fs-2">0</h3>
+                        <p class="fs-5">Total Ordes</p>
+                    </div>
+                    <i class="bi bi-receipt fs-1 primary-text border rounded-full  dashboard-count"></i>
+                </div>
+            </div>
+        
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div>
+                        <h3 class="fs-2">0</h3>
+                        <p class="fs-5">Pending Orders</p>
+                    </div>
+                    <i class="bi bi-receipt fs-1 primary-text border rounded-full  dashboard-count"></i>
+                </div>
+            </div>
+        
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div>
+                        <h3 class="fs-2">0</h3>
+                        <p class="fs-5">Delivered</p>
+                    </div>
+                    <i class="bi bi-truck fs-1 primary-text border rounded-full  dashboard-count"></i>
+                </div>
+            </div>
+        
+            <div class="col-md-3">
+                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                    <div>
+                        <h3 class="fs-2">0</h3>
+                        <p class="fs-5">Out Of Stock</p>
+                    </div>
+                    <i class="bi bi-exclamation-lg fs-1 primary-text border rounded-full  dashboard-count"></i>
+                </div>
+            </div></div>
         </div>
       </div>     
     </div>
     <!-- /#page-content-wrapper -->
 
     <script src="/js/main.js"></script>
+    <script src="/js/dashboard.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
       document.querySelector(".side-heading").innerHTML = 'Dashboard';
