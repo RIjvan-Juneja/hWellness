@@ -25,5 +25,7 @@ router.get('/medication/add',authMiddleware,medication.renderMedicationForm);
 router.post('/medication/api/list',authMiddleware,medication.displayMedication);
 router.post('/medication/api/add',authMiddleware,parser.parser.single('image'),medication.addMedication);
 router.get('/reports',authMiddleware,reports.renderReports);
+router.get('/reports/api',authMiddleware,reports.userReports);
+
 
 module.exports = router;
