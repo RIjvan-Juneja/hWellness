@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
   Medication.init({
     user_id: DataTypes.INTEGER,
     file_path: DataTypes.STRING,
-    start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE, // if only one time thant start_date = end_date
+    start_date: DataTypes.DATEONLY,
+    end_date: DataTypes.DATEONLY, // if only one time thant start_date = end_date
     time: DataTypes.TIME,
-    recurrence: DataTypes.STRING,  // daily or weekly
+    recurrence: DataTypes.STRING,  // daily or weekly or oto
     day_of_week: DataTypes.STRING, // if weekly then day (mon,tue,fri....)
     created_at: {
       type: DataTypes.DATE,

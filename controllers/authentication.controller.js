@@ -14,7 +14,7 @@ const renderDashboard = (req, res) => {
 }
 
 const renderLogin = (req, res) => {
-  if(typeof  req.cookies.jwt != "undefined")  {
+  if(typeof  req.cookies.access_token != "undefined")  {
     return res.redirect('/dashboard'); 
   }else {
     res.render("pages/login.ejs");
@@ -63,8 +63,9 @@ const login = async (req, res) => {
         session_token : functions.randomString(6)
       }
 
-      const token = jwt.sign(payload, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
-      res.cookie('jwt', token, {
+
+      const token = jwt.sign(payload, process.env.JWT_SECRET || 'Rijvan1116c', { expiresIn: '1h' });
+      res.cookie('access_token', token, {
         httpOnly: true, 
         maxAge: 3600000 // 1 hour expiration
       });
@@ -83,7 +84,7 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie('jwt'); 
+  res.clearCookie('access_token'); 
   res.redirect('/login');
 }
 
