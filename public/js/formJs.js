@@ -73,11 +73,10 @@ const addMedication = async (formId,formType) => {
             method: 'POST',
             body: formData
         });
-
         const resData = await response.json();
         if (response.status === 200) {
             console.log(resData);
-            // form.reset();
+            form.reset();
             alert("Sucessfully added");
         } else {
             console.log(resData);

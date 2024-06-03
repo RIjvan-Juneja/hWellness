@@ -18,8 +18,9 @@ router.get('/logout',authMiddleware,authentication.logout);
 router.post('/logout/all',authMiddleware,authentication.logoutFromAll);
 
 // ==================== user ===================== //
-router.get('/medication',medication.renderMedication);
+router.get('/medication',authMiddleware,medication.renderMedicationList);
 router.get('/medication/add',authMiddleware,medication.renderMedicationForm);
+router.post('/medication/api/list',authMiddleware,medication.displayMedication);
 router.post('/medication/api/add',authMiddleware,parser.parser.single('image'),medication.addMedication);
 
 module.exports = router;

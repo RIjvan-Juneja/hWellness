@@ -24,15 +24,44 @@
       <div id="page-content-wrapper" class="vh-100 overflow-scroll">
         <%- include('../components/header.ejs'); %>
         <div class="container-fluid px-4">
-          hwllo
+          <div class="row my-5">
+            <div class="col overflow-scroll">
+              <table class="table table-bordered align-middle">
+                  <thead></thead>
+                  <tbody></tbody>
+              </table>
+              <!-- pagination  -->
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item firstPage">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item prevButton"><a class="page-link" href="#">&lt;</a></li>
+                  <li class="page-item page"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item nextButton"><a class="page-link" href="#">&gt;</a></li>
+                  <li class="page-item">
+                    <a class="page-link lastPage" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>     
     </div>
     <!-- /#page-content-wrapper -->
 
     <script src="/js/main.js"></script>
+    <script src="/js/medicationList.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+    <script>
+      document.querySelector(".side-heading").innerHTML = 'Medication';
+      document.querySelector(`#medication`).classList.add("active");
+    </script>
 </body>
 
 </html>

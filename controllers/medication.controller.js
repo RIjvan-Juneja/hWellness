@@ -2,7 +2,7 @@ const sendMail = require("../services/sendMail");
 const bcrypt = require('bcryptjs');
 const db = require("../models/index");
 
-const renderMedication = (req, res) => {
+const renderMedicationList = (req, res) => {
   res.render("pages/medicationlist.ejs", { user : req.user});
 }
 
@@ -46,4 +46,18 @@ const addMedication = async (req, res) => {
   }
 }
 
-module.exports = { renderMedication, renderMedicationForm,  addMedication};
+const displayMedication = async (req,res) => {
+  try {
+    const medications = await db.Medication.findAll({
+      attributes : ['file_path','start_date', 'end_date','time', 'recurrence', 'day_of_week'],
+      where : {
+        user_id : req.user.id || 0
+      }
+    }); 
+    res.status(200).send(medications);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ status: "Internal Server Error", msg: "An unexpected error occurred while processing your request" });
+  }
+}
+module.exports = { renderMedicationList, renderMedicationForm, addMedication, displayMedication };
