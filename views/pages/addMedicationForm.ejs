@@ -74,7 +74,7 @@
 
                         <div class="col-4">
                           <label for="time" class="form-label">Time</label>
-                          <input type="text" class="form-control" placeholder="Time in 24 hours" id="time" name="time">
+                          <input type="time" class="form-control" placeholder="Time in 24 hours" id="time" name="time">
                           <span class="timeError errorSpan"></span>
                         </div>
 
@@ -137,24 +137,9 @@
                         </div>
 
                         <div class="col-4">
-                          <label for="timePickerInput" class="form-label">Select Time</label>
-                          <div class="input-group time-picker">
-                            <input type="text" class="form-control" placeholder="Time In 24 hours" name="time"
-                              id="timePickerInput" readonly />
-                            <span class="input-group-text" id="timePickerButton">
-                              <i class="bi bi-clock"></i>
-                            </span>
-                            <div class="time-picker-dropdown" id="timePickerDropdown">
-                              <select id="hours" class="form-select">
-                                <!-- Hours options will be populated by JavaScript -->
-                              </select>
-                              <select id="minutes" class="form-select">
-                                <!-- Minutes options will be populated by JavaScript -->
-                              </select>
-                              <button class="btn btn-primary" type="button" id="setTimeButton">Set Time</button>
-                            </div>
-                          </div>
-                          <span class="productNameError errorSpan"></span>
+                          <label for="otoTime" class="form-label">Time</label>
+                          <input type="time" class="form-control" placeholder="Time in 24 hours" id="otoTime" name="time">
+                          <span class="otoTimeError errorSpan"></span>
                         </div>
 
                         <div class="col-4">
