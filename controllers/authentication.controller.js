@@ -5,22 +5,6 @@ const functions = require("../helpers/functions");
 const bcrypt = require('bcryptjs');
 const db = require("../models/index");
 
-const renderRegistation = (req, res) => {
-  res.render("pages/registation.ejs");
-}
-
-const renderDashboard = (req, res) => {
-  res.render("pages/dashboard.ejs", { user : req.user});
-}
-
-const renderLogin = (req, res) => {
-  if(typeof  req.cookies.access_token != "undefined")  {
-    return res.redirect('/dashboard'); 
-  }else {
-    res.render("pages/login.ejs");
-  }
-}
-
 const registation = async (req, res) => {
   try {
 
@@ -103,4 +87,4 @@ const logoutFromAll = async (req, res) => {
     console.log(err);
   }
 }
-module.exports = { renderRegistation, renderLogin, registation, login,renderDashboard, logout, logoutFromAll};
+module.exports = { registation, login, logout, logoutFromAll};

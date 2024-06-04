@@ -2,14 +2,6 @@ const sendMail = require("../services/sendMail");
 const bcrypt = require('bcryptjs');
 const db = require("../models/index");
 
-const renderMedicationList = (req, res) => {
-  res.render("pages/medicationlist.ejs", { user : req.user});
-}
-
-const renderMedicationForm = (req, res) => {
-  res.render("pages/addMedicationForm.ejs", { user : req.user});
-}
-
 const addMedication = async (req, res) => {
   try {
     console.log(req.body);
@@ -60,4 +52,4 @@ const displayMedication = async (req,res) => {
     res.status(500).send({ status: "Internal Server Error", msg: "An unexpected error occurred while processing your request" });
   }
 }
-module.exports = { renderMedicationList, renderMedicationForm, addMedication, displayMedication };
+module.exports = { addMedication, displayMedication };

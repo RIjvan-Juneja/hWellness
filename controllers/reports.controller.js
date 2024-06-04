@@ -1,10 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const renderReports = (req, res) => {
-  res.render("pages/reports.ejs", { user : req.user });
-}
-
 const userReports = async (req,res) => {
 
   const reportsFolder = path.join(__dirname,'../public/','reports');
@@ -35,6 +31,6 @@ const userReports = async (req,res) => {
   }
 }
 
-module.exports = { renderReports, userReports };
+module.exports = { userReports };
 
 
