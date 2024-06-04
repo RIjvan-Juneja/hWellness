@@ -73,7 +73,7 @@ const registationValidation = () => {
     }
   }
 
-  return false;
+  return true;
 }
 
 
