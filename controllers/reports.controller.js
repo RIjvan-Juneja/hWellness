@@ -5,9 +5,9 @@ const renderReports = (req, res) => {
   res.render("pages/reports.ejs", { user : req.user });
 }
 
-const userReports = async (req,res) =>{
+const userReports = async (req,res) => {
 
-  const reportsFolder = path.join(__dirname,'..','reports');
+  const reportsFolder = path.join(__dirname,'../public/','reports');
   try {
     let obj = [];
     // Read the directory
@@ -15,9 +15,7 @@ const userReports = async (req,res) =>{
       if (err) {
           return res.status(500).send({ status: "Internal Server Error", msg: "An unexpected error occurred while processing your request" });
       }
-      // Filter CSV files
       const csvFiles = files.filter(file => path.extname(file).toLowerCase() === '.csv');
-      // Log CSV files
       csvFiles.forEach((file,i) => {
         let arr = file.split("_");
         if(req.user.id == arr[0]){
@@ -28,7 +26,6 @@ const userReports = async (req,res) =>{
             reportName : file
           });
         }
-        console.log(file,arr);
       });
       res.status(200).send(obj);
     });

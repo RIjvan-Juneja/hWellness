@@ -26,7 +26,7 @@ const generateReportForUser = async (user) => {
     const date = new Date();
     const currentDate = date.toISOString().split('T')[0]; 
     const csvFileName = `${user.id}_${currentDate}_report.csv`
-    const csvFilePath = path.join(__dirname, '..', 'reports', csvFileName);
+    const csvFilePath = path.join(__dirname, '../public/', 'reports', csvFileName);
 
     const csvWriter = createCsvWriter({
         path: csvFilePath,
@@ -57,7 +57,6 @@ async function processReportJob(job) {
     const currentDate = date.toISOString().split('T')[0]; 
     let { user } = job.data;
     const { csvFilePath, csvFileName } = await generateReportForUser(user);
-    console.log("file name: ", csvFileName, " file path: ", csvFilePath);
     await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generatred at ${currentDate}`, null, csvFilePath);
     await mailService(user.email, 'Your Weekly Report', 'Report from thisDate to thisDate', null, csvFilePath, csvFileName);
     fs.unlinkSync(csvFilePath);
@@ -69,8 +68,6 @@ async function getUsers() {
     let users = await db.User.findAll({
         attributes: ['id', 'email']
     });
-
-    console.log(users);
     return users;
 }
 
