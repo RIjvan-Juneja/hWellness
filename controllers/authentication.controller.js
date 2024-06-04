@@ -36,6 +36,10 @@ const login = async (req, res) => {
   const { username } = req.body;
   try {
     const user = await db.User.findOne({ where: { email : username } });
+    if(!user){
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+    
     let password = functions.encryptString(user.dataValues.salt  + req.body.password);
     
     if (!user || !(user.dataValues.password_hash == password)) {
@@ -68,8 +72,19 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie('access_token'); 
-  res.redirect('/login');
+  try {
+    await db.Session.update({ session_token : ''},{
+      where: {
+        session_token : req.user.session_token,
+        user_id : req.user.id
+      },
+    });
+    res.clearCookie('access_token'); 
+    res.redirect('/login');
+  } catch (error) {
+    console.log("failed");
+  }
+  
 }
 
 const logoutFromAll = async (req, res) => {
