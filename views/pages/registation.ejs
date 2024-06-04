@@ -29,42 +29,44 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col mb-3 col-md-12 col-lg-6">
+					<div class="col mb-1 col-md-12 col-lg-6">
 						<label class="text-primary" for="firstName">First name : </label>
 						<input tabindex="1" type="text" name="first_name" id="firstName" placeholder="First Name" class="form-control border-primary">
+						<span class="errorSpan firstNameError"></span>
 					</div>
-					<div class="col mb-3 col-md-12 col-lg-6">
+					<div class="col mb-1 col-md-12 col-lg-6">
 						<label class="text-primary" for="lastName">Last name : </label>
 						<input type="text" tabindex="2" name="last_name" id="lastName" placeholder="Last Name" class="form-control border-primary">
+						<span class="errorSpan lastNameError"></span>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col mb-3">
+					<div class="col mb-1">
 						<label class="text-primary" for="email">Email : </label>
-						<input type="text" tabindex="3" name="email" id="email" placeholder="Email"
-							class="form-control border-primary">
+						<input type="text" tabindex="3" name="email" id="email" placeholder="Email" class="form-control border-primary">
+						<span class="errorSpan emailError"></span>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col mb-3">
+					<div class="col mb-1">
 						<label class="text-primary" for='phoneno'>Phone No : </label>
-						<input type="number" tabindex="4" name="mobile_number" id="phoneno" placeholder="Phone No."
-							class="form-control border-primary">
+						<input type="number" tabindex="4" name="mobile_number" id="phoneno" placeholder="Phone No." class="form-control border-primary">
+						<span class="errorSpan phonenoError"></span>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col mb-3 col-md-12 col-lg-4">
 						<label class="text-primary" for="birthdate">Age : </label>
-						<input type="number" tabindex="5" placeholder="Age" name="age" id="age"
-							class="form-control border-primary">
+						<input type="number" tabindex="5" placeholder="Age" name="age" id="age" class="form-control border-primary">
+						<span class="errorSpan ageError"></span>
 					</div>
 					<div class="col mb-3 col-md-12 col-lg-8">
-						<label class="text-primary" for="birthdate">Password : </label>
-						<input type="text" tabindex="5" placeholder="Enter Password" name="password" id="password"
-							class="form-control border-primary">
+						<label class="text-primary" for="password">Password : </label>
+						<input type="text" tabindex="5" placeholder="Enter Password" name="password" id="password" class="form-control border-primary">
+						<span class="errorSpan passwordError"></span>
 					</div>
 				</div>
 
