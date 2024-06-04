@@ -27,4 +27,8 @@ const renderReports = (req, res) => {
   res.render("pages/reports.ejs", { user : req.user });
 }
 
-module.exports = { renderDashboard, renderLogin, renderRegistation, renderMedicationList, renderMedicationForm, renderReports };
+const renderSessions = (req, res) => {
+  res.render("pages/sessions.ejs", { user : req.user });
+}
+
+module.exports = { renderDashboard, renderLogin, renderRegistation, renderMedicationList, renderMedicationForm, renderReports, renderSessions };

@@ -8,6 +8,7 @@ const authMiddleware = require("../middleware/auth.middleware");
 const medication = require("../controllers/medication.controller");
 const parser = require("../middleware/cloudinaryFileUpload");
 const reports = require("../controllers/reports.controller");
+const sessions = require("../controllers/sessions.controller");
 require("../controllers/notification");
 require("../controllers/worker");
 
@@ -19,6 +20,8 @@ router.get('/dashboard',authMiddleware,renderController.renderDashboard);
 router.get('/medication',authMiddleware,renderController.renderMedicationList);
 router.get('/medication/add',authMiddleware,renderController.renderMedicationForm);
 router.get('/reports',authMiddleware,renderController.renderReports);
+router.get('/sessions',authMiddleware,renderController.renderSessions);
+
 
 // =============== authentication =================//
 
@@ -32,6 +35,6 @@ router.post('/logout/all',authMiddleware,authentication.logoutFromAll);
 router.post('/medication/api/list',authMiddleware,medication.displayMedication);
 router.post('/medication/api/add',authMiddleware,parser.parser.single('image'),medication.addMedication);
 router.post('/reports/api',authMiddleware,reports.userReports);
-
+router.post('/sessions/api',authMiddleware,sessions.activeUser);
 
 module.exports = router;
