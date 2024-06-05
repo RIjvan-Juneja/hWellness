@@ -29,6 +29,7 @@ router.post('/api/registation',authentication.registation);
 router.post('/api/login',authentication.login);
 router.get('/logout',authMiddleware,authentication.logout);
 router.post('/logout/all',authMiddleware,authentication.logoutFromAll);
+router.post('/sessions/logout/device/:session_token',authMiddleware,authentication.logoutDevice);
 
 // ==================== Panel ===================== //
 

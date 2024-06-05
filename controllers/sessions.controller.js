@@ -9,10 +9,19 @@ const activeUser = async (req,res) => {
           [Op.ne] : ''
         },
         user_id : req.user.id
-      }
+      },
+      order: [
+        ['id', 'DESC']
+      ]
     });
 
-    res.status(200).send({ status: 'ok' });
+    const processedUsers = users.map(user => {
+      return {
+        ...user.dataValues,
+        is_logged : (user.session_token == req.user.session_token)? 1:0
+      }
+    });
+    res.status(200).send(processedUsers);
 
   } catch (error) {
     console.log(error);

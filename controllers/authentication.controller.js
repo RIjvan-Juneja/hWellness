@@ -2,7 +2,6 @@ const sendMail = require("../services/sendMail");
 const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
 const functions = require("../helpers/functions");
-const bcrypt = require('bcryptjs');
 const db = require("../models/index");
 
 const registation = async (req, res) => {
@@ -102,4 +101,30 @@ const logoutFromAll = async (req, res) => {
     console.log(err);
   }
 }
-module.exports = { registation, login, logout, logoutFromAll};
+
+const logoutDevice = async (req,res) =>{
+  
+  try{
+    const update = await db.Session.update({ session_token : ''},{
+      where: {
+        session_token : req.params.session_token ,
+        user_id : req.user.id
+      },
+    });
+    console.log(update[0],'****');
+    if(!update[0]){
+      return res.status(500).send({ status: 'not Updated' });
+    }
+
+    res.status(200).send({ status: 'ok' });
+
+  }catch(err){
+    res.status(500).send({status : "Internal Server Error", msg: "Unexpected error on server"});
+    console.log(err);
+  }
+
+
+  // console.log(req.params.session_token);
+}
+
+module.exports = { registation, login, logout, logoutFromAll, logoutDevice };

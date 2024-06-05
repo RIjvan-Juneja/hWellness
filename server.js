@@ -21,7 +21,7 @@ app.listen(PORT, (err)=>{
     if(err){
         console.log("connection error");
     } else {
-        console.log(`Server is : http://${HOST}:${PORT}/hWellness`);
+        console.log(`Server is : http://${HOST}:${PORT}/login`);
     }
 })
 
