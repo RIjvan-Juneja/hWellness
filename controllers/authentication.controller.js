@@ -81,7 +81,7 @@ const logout = async (req, res) => {
     res.clearCookie('access_token'); 
     res.redirect('/login');
   } catch (error) {
-    console.log("failed");
+    console.log(error);
   }
   
 }
@@ -111,7 +111,7 @@ const logoutDevice = async (req,res) =>{
         user_id : req.user.id
       },
     });
-    console.log(update[0],'****');
+
     if(!update[0]){
       return res.status(500).send({ status: 'not Updated' });
     }
@@ -124,7 +124,6 @@ const logoutDevice = async (req,res) =>{
   }
 
 
-  // console.log(req.params.session_token);
 }
 
 module.exports = { registation, login, logout, logoutFromAll, logoutDevice };

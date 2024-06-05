@@ -6,7 +6,6 @@ const { Op } = require('sequelize');
 const getUserEmailById = async (userId) => {
   // Implement logic to fetch user email by userId
   const user = await db.User.findByPk(userId);
-  console.log(user);
   return user.email;
 };
 
@@ -18,7 +17,6 @@ const sendNotification = async () =>{
   
 
   try {
-    console.log(currentDate,currentTime,currentDay); 
     // // One-time medication reminders
     const oneTimeMedications = await db.Medication.findAll({
       where: {

@@ -28,7 +28,6 @@ const addMedication = async (formId,formType) => {
     } else {
         formData.append('form_type', 'recurrence');
     }
-    console.log(formData);
     try {
         const response = await fetch('/medication/api/add', {
             method: 'POST',
@@ -37,7 +36,6 @@ const addMedication = async (formId,formType) => {
         const resData = await response.json();
         if (response.status === 200) {
             loader.style.display = 'none';
-            console.log(resData);
             form.reset();
             alert("Sucessfully added");
         } else {

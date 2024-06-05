@@ -134,7 +134,6 @@ if(document.querySelector("#signInBtn")){
         });
         const resData = await response.json();
         if(response.status === 200){
-          console.log(resData);
           window.location.href = "/dashboard";
         } else {
           document.querySelector(".passwordError").textContent =  "Invalid Username or Password" ;

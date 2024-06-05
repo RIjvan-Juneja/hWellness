@@ -4,7 +4,6 @@ const db = require("../models/index");
 
 const addMedication = async (req, res) => {
   try {
-    console.log(req.body);
     let data;
 
     if(req.body.form_type == 'oto'){

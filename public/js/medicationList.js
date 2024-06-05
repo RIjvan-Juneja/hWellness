@@ -5,7 +5,6 @@ const displayMedication = async () => {
   })
   const resData = await response.json();
   if (response.status === 200) {
-    console.log(resData);
     const thead = document.querySelector("table thead");
     const tbody = document.querySelector("table tbody");
 
@@ -27,7 +26,6 @@ const displayMedication = async () => {
 
       resData.forEach(el => {
         let tr = document.createElement("tr");
-        console.log(el);
         tr.innerHTML = `
           <td style='width: 165px;'> <img src='${el.image}' alt='medication image' width='100%' /> </td>
           <td> ${el.start_date} </td>

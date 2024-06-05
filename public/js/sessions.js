@@ -1,7 +1,7 @@
 
 const getImageAndName = (str) =>{
-  const images = ['https://bootdey.com/img/Content/avatar/avatar7.png','https://bootdey.com/img/Content/avatar/avatar1.png','https://bootdey.com/img/Content/avatar/avatar3.png','https://bootdey.com/img/Content/avatar/avatar2.png','https://bootdey.com/img/Content/avatar/avatar4.png'];
-  const names = ['Brooke Kelly', 'Rijvan Juneja', 'Hemakshi Makwana', ' Jeel Patel','Ankit Boricha'];
+  const images = ['https://bootdey.com/img/Content/avatar/avatar1.png','https://bootdey.com/img/Content/avatar/avatar7.png','https://bootdey.com/img/Content/avatar/avatar3.png','https://bootdey.com/img/Content/avatar/avatar2.png','https://bootdey.com/img/Content/avatar/avatar4.png'];
+  const names = ['Brooke Kelly', 'Rijvan Juneja', 'Hemakshi 51 Makwana', ' Jeel Patel','Ankit Boricha'];
   let index = str.charCodeAt(0) % images.length;
   return [images[index], names[index]];
 }
@@ -27,6 +27,8 @@ const showSessions = async () => {
   if (response.status === 200) {
     const tbody = document.querySelector("tbody");
     resData.forEach((el,i) => {
+      let date =  new Date(el.loggin_at);
+      let loggin_at = date.toDateString() + ' | ' + date.toLocaleTimeString()
       let profile = getImageAndName(el.session_token);
       let tr = document.createElement("tr");
       tr.classList.add('candidates-list');
@@ -52,7 +54,7 @@ const showSessions = async () => {
           </td>
           <td>${el.session_token}</td>
           <td class="candidate-list-favourite-time text-center">
-            ${el.loggin_at}
+            ${loggin_at}
           </td>
           <td class="text-center">${(el.is_logged)? 'Current' : 'Active'}</td>
           <td class='text-center'>
@@ -74,3 +76,4 @@ const showSessions = async () => {
   }
 }
 showSessions();
+                        

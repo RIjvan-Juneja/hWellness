@@ -3,7 +3,6 @@ const showReports = async () => {
     method: "POST",
   })
   const resData = await response.json();
-  console.log(resData);
   if (response.status === 200) {
     const row = document.querySelector(".report-container");
     resData.forEach((el) => {
