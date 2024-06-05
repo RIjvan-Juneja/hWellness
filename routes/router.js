@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const passport = require('../config/passport');
-router.use(passport.initialize());
 const renderController = require("../controllers/render.controller");
 const authentication = require("../controllers/authentication.controller");
 const authMiddleware = require("../middleware/auth.middleware");
@@ -9,11 +8,13 @@ const medication = require("../controllers/medication.controller");
 const parser = require("../middleware/cloudinaryFileUpload");
 const reports = require("../controllers/reports.controller");
 const sessions = require("../controllers/sessions.controller");
+const medicationlog = require("../controllers/medicationLog.controller");
 require("../controllers/notification");
 require("../controllers/worker");
 
 // ================== render pages ==================//
 
+router.use(passport.initialize());
 router.get('/login',renderController.renderLogin);
 router.get('/registation',renderController.renderRegistation);
 router.get('/dashboard',authMiddleware,renderController.renderDashboard);
@@ -37,5 +38,6 @@ router.post('/medication/api/list',authMiddleware,medication.displayMedication);
 router.post('/medication/api/add',authMiddleware,parser.parser.single('image'),medication.addMedication);
 router.post('/reports/api',authMiddleware,reports.userReports);
 router.post('/sessions/api',authMiddleware,sessions.activeUser);
+router.get('/medicationlog/mark/:secretKey',medicationlog.markAsDone);
 
 module.exports = router;

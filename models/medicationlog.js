@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     medication_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
     taken_at: DataTypes.DATE,
+    link : DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW

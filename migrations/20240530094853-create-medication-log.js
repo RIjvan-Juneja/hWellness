@@ -28,6 +28,7 @@ module.exports = {
       taken_at: {
         type: Sequelize.DATE
       },
+      link :  Sequelize.STRING,
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

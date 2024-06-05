@@ -1,6 +1,7 @@
 const cron = require('node-cron');
 const db = require('../models/index');
 const sendEmail = require('../services/sendMail');
+const functions = require("../helpers/functions");
 const { Op } = require('sequelize');
 
 const getUserEmailById = async (userId) => {
@@ -8,6 +9,21 @@ const getUserEmailById = async (userId) => {
   const user = await db.User.findByPk(userId);
   return user.email;
 };
+
+const insertMedicationLog = async (data) =>{
+  try {
+    const insert = db.MedicationLog.create({
+      medication_id: data.id,
+      user_id: data.user_id,
+      link : functions.randomString(15)
+    });
+    return insert;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// const oneTime 
 
 const sendNotification = async () =>{
   const now = new Date();
@@ -30,6 +46,8 @@ const sendNotification = async () =>{
         recurrence: 'oto'
       }
     });
+
+    
   
     // Daily medication reminders
     const dailyMedications = await db.Medication.findAll({
@@ -56,12 +74,15 @@ const sendNotification = async () =>{
     // console.log(allMedications);
     
     for (const medication of allMedications) {
+      let data = await insertMedicationLog(medication);
       let html = `
-      <p>Please Take Your Medicine</p> </br>
-      <img src='${medication.file_path}' width ='250px' />
+        <p>Please Take Your Medicine</p> </br>
+        <img src='${medication.file_path}' width ='250px' />
+        <a href='medicationlog/mark/${data.link}'>  Mark as Done ${data.link}</a>
+        <p>link : http://hwellness/medicationlog/mark/${data.link}</p>
       `;
       let userEmail = await getUserEmailById(medication.user_id);
-      sendEmail.sendEmail(userEmail, 'Medication Reminder', `It's time to take your medication.`,html,null);
+      await sendEmail.sendEmail(userEmail, 'Medication Reminder', `It's time to take your medication.`,html,null);
     }
   } catch (error) {
     console.log(error);
