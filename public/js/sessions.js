@@ -1,4 +1,8 @@
 
+
+// let socket = io();
+
+
 const getImageAndName = (str) =>{
   const images = ['https://bootdey.com/img/Content/avatar/avatar1.png','https://bootdey.com/img/Content/avatar/avatar7.png','https://bootdey.com/img/Content/avatar/avatar3.png','https://bootdey.com/img/Content/avatar/avatar2.png','https://bootdey.com/img/Content/avatar/avatar4.png'];
   const names = ['Brooke Kelly', 'Rijvan Juneja', 'Hemakshi 51 Makwana', ' Jeel Patel','Ankit Boricha'];
@@ -12,8 +16,11 @@ const logoutDevice = async (session_token,tr) =>{
   })
   const resData = await response.json();
   if (response.status === 200) {
-    alert("Logout Succesfully")
+
+    alert("Logout Succesfully");
+    
     tr.remove();
+    socket.emit('logout_attempt_req', {}); 
   } else {
     alert("Failed to Logout")
   }
