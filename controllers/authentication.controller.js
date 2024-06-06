@@ -50,7 +50,6 @@ const login = async (req, res) => {
         session_token : functions.randomString(6)
       }
 
-
       const token = jwt.sign(payload, process.env.JWT_SECRET || 'Rijvan1116c', { expiresIn: '1h' });
       res.cookie('access_token', token, {
         httpOnly: true, 
