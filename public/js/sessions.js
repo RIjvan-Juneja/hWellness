@@ -1,8 +1,4 @@
 
-
-// let socket = io();
-
-
 const getImageAndName = (str) =>{
   const images = ['https://bootdey.com/img/Content/avatar/avatar1.png','https://bootdey.com/img/Content/avatar/avatar7.png','https://bootdey.com/img/Content/avatar/avatar3.png','https://bootdey.com/img/Content/avatar/avatar2.png','https://bootdey.com/img/Content/avatar/avatar4.png'];
   const names = ['Brooke Kelly', 'Rijvan Juneja', 'Hemakshi 51 Makwana', ' Jeel Patel','Ankit Boricha'];
