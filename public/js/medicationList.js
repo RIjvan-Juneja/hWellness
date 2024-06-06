@@ -28,6 +28,8 @@ const displayMedication = async () => {
         let tr = document.createElement("tr");
         tr.innerHTML = `
           <td style='width: 165px;'> <img src='${el.image}' alt='medication image' width='100%' /> </td>
+          <td> ${el.name} </td>
+          <td> ${el.notes} </td>
           <td> ${el.start_date} </td>
           <td> ${el.end_date} </td>
           <td> ${el.time} </td>

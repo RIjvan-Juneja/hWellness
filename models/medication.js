@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Medication.init({
     user_id: DataTypes.INTEGER,
+    name: DataTypes.STRING,
+    notes: DataTypes.STRING,
     file_path: DataTypes.STRING,
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY, // if only one time thant start_date = end_date
