@@ -65,6 +65,18 @@
                         <h5>Recurring</h5>
 
                         <div class="col-4">
+                          <label for="name" class="form-label">Name </label>
+                          <input type="text" class="form-control" placeholder="Enter Medication name" id="name" name="name">
+                          <span class="nameError errorSpan"></span>
+                        </div>
+
+                        <div class="col-8">
+                          <label for="notes" class="form-label">Notes  </label>
+                          <input type="text" class="form-control" placeholder="Enter Notes" id="notes" name="note">
+                          <span class="noteError errorSpan"></span>
+                        </div>
+
+                        <div class="col-4">
                           <label for="routing" class="form-label">Select Routing </label>
                           <select class="form-select" id="routing" name="routing">
                             <option value="">select.....</option>
@@ -131,6 +143,18 @@
                     <form id="otoForm">
                       <div class="row g-3">
                         <h5>One Time Only</h5>
+
+                        <div class="col-4">
+                          <label for="oName" class="form-label">Name </label>
+                          <input type="text" class="form-control" placeholder="Enter Medication name" id="oName" name="name">
+                          <span class="oNameError errorSpan"></span>
+                        </div>
+
+                        <div class="col-8">
+                          <label for="oNotes" class="form-label">Notes  </label>
+                          <input type="text" class="form-control" placeholder="Enter Notes" id="oNotes" name="note">
+                          <span class="oNotesError errorSpan"></span>
+                        </div>
 
                         <div class="col-4">
                           <label for="otoDate" class="form-label">Date </label>
