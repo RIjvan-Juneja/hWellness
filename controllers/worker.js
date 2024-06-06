@@ -6,16 +6,14 @@ const fs = require('fs');
 const path = require('path');
 const db = require('../models/index');
 
-// Define Redis connection details
-const redisConnection = {
+const connection = {
     host: '127.0.0.1',
     port: 6379,
 };
   
-// Initialize BullMQ queue
-const reportQueue = new Queue('report-generation', { connection: redisConnection });
+const queue = new Queue('report-generation', { connection: connection });
 
-const generateReportForUser = async (user) => {
+const reportGenerate = async (user) => {
     const reportData = await db.Medication.findAll({
         attributes: ['id','start_date', 'end_date', 'time','recurrence', 'day_of_week', 'created_at'],
         where : {
@@ -52,17 +50,16 @@ const generateReportForUser = async (user) => {
 }
 
 // Define the job processing function
-async function processReportJob(job) {
+async function sendNotfication(task) {
     const date = new Date();
     const currentDate = date.toISOString().split('T')[0]; 
-    let { user } = job.data;
-    const { csvFilePath, csvFileName } = await generateReportForUser(user);
+    let { user } = task.data;
+    const { csvFilePath, csvFileName  } = await reportGenerate(user);
     await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generatred at ${currentDate}`, null, csvFilePath);
-    await mailService(user.email, 'Your Weekly Report', 'Report from thisDate to thisDate', null, csvFilePath, csvFileName);
-    fs.unlinkSync(csvFilePath);
+    // fs.unlinkSync(csvFilePath);
 }
 
-const worker = new Worker('report-generation', processReportJob, { connection: redisConnection });
+const worker = new Worker('user-report', sendNotfication, { connection: connection });
 
 async function getUsers() {
     let users = await db.User.findAll({
@@ -72,12 +69,11 @@ async function getUsers() {
 }
 
 // At 07:00 on every  Sunday.
-const schedule = cron.schedule('0 7 * * 0', async () => {
+const schedule = cron.schedule('* * * * *', async () => {
     const users = await getUsers();
     users.forEach(user => {
-        reportQueue.add('generate-report', { user });
+        queue.add('user-data', { user });
     });
-    console.log('Scheduled jobs for user report generation.');
 });
 
 schedule.start();
