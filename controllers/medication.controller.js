@@ -9,6 +9,8 @@ const addMedication = async (req, res) => {
     if(req.body.form_type == 'oto'){
       data = {
         user_id: req.user.id,
+        name: req.body.name,
+        notes:req.body.note,
         file_path: req.file.path,
         start_date: req.body.start_date,
         end_date: req.body.start_date,
@@ -19,6 +21,8 @@ const addMedication = async (req, res) => {
     }else {
       data = {
         user_id: req.user.id,
+        name: req.body.name,
+        notes:req.body.note,
         file_path: req.file.path,
         start_date: req.body.start_date,
         end_date: req.body.end_date,
@@ -40,7 +44,7 @@ const addMedication = async (req, res) => {
 const displayMedication = async (req,res) => {
   try {
     const medications = await db.Medication.findAll({
-      attributes : [['file_path', 'image'],'start_date', 'end_date','time', 'recurrence', 'day_of_week'],
+      attributes : [['file_path', 'image'],'name','notes','start_date', 'end_date','time', 'recurrence', 'day_of_week'],
       where : {
         user_id : req.user.id || 0
       }

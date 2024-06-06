@@ -17,6 +17,8 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
+      name: Sequelize.STRING,
+      notes: Sequelize.STRING,
       file_path: {
         type: Sequelize.STRING
       },
