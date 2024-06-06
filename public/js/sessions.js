@@ -12,8 +12,11 @@ const logoutDevice = async (session_token,tr) =>{
   })
   const resData = await response.json();
   if (response.status === 200) {
-    alert("Logout Succesfully")
+
+    alert("Logout Succesfully");
+    
     tr.remove();
+    socket.emit('logout_attempt_req', {}); 
   } else {
     alert("Failed to Logout")
   }

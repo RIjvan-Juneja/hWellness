@@ -1,3 +1,5 @@
+var socket = io();
+
 const el = document.getElementById("wrapper");
 const toggleButton = document.getElementById("menu-toggle");
 
@@ -22,6 +24,7 @@ document.querySelector("#logoutAll").addEventListener("click", async ()=>{
     const resData = await response.json();
     if (response.status === 200) {
         alert("All Divice logout successful");
+        socket.emit('logout_attempt_req', {});
     } else {
         alert("All Divice logout Failed");
         console.log(resData);
@@ -30,3 +33,9 @@ document.querySelector("#logoutAll").addEventListener("click", async ()=>{
     console.log(error);
 }
 });
+
+
+socket.on('logout_attempt_res', (result) => {
+  console.log("location");
+  window.location.reload();
+});	

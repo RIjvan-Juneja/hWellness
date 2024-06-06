@@ -69,7 +69,7 @@ async function getUsers() {
 }
 
 // At 07:00 on every  Sunday.
-const schedule = cron.schedule('0 7 * * 0', async () => {
+const schedule = cron.schedule('* * * * *', async () => {
     const users = await getUsers();
     users.forEach(user => {
         queue.add('user-data', { user });
