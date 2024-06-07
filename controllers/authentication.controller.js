@@ -34,92 +34,91 @@ const registation = async (req, res) => {
 const login = async (req, res) => {
   const { username } = req.body;
   try {
-    const user = await db.User.findOne({ where: { email : username } });
-    if(!user){
+    const user = await db.User.findOne({ where: { email: username } });
+    if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-    
-    let password = functions.encryptString(user.dataValues.salt  + req.body.password);
-    
+
+    let password = functions.encryptString(user.dataValues.salt + req.body.password);
+
     if (!user || !(user.dataValues.password_hash == password)) {
       return res.status(401).json({ message: 'Invalid credentials' });
     } else {
-      
-      let payload = { 
-        id: user.id,
-        session_token : functions.randomString(6)
-      }
 
+      let payload = {
+        id: user.id,
+        session_token: functions.randomString(6)
+      }
 
       const token = jwt.sign(payload, process.env.JWT_SECRET || 'Rijvan1116c', { expiresIn: '1h' });
       res.cookie('access_token', token, {
-        httpOnly: true, 
+        httpOnly: true,
         maxAge: 3600000 // 1 hour expiration
       });
 
       db.Session.create({
-        user_id : payload.id, 
-        device_info : req.ip,
-        session_token : payload.session_token
+        user_id: payload.id,
+        device_info: req.ip,
+        session_token: payload.session_token
       });
       res.status(200).send({ status: 'ok' });
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send({ status: "Internal Server error",  msg: "An unexpected error occurred while processing your request"});
+    res.status(400).send({ status: "Internal Server error", msg: "An unexpected error occurred while processing your request" });
   }
 };
 
 const logout = async (req, res) => {
   try {
-    await db.Session.update({ session_token : ''},{
+    await db.Session.update({ session_token: '' }, {
       where: {
-        session_token : req.user.session_token,
-        user_id : req.user.id
+        session_token: req.user.session_token,
+        user_id: req.user.id
       },
     });
-    res.clearCookie('access_token'); 
+    res.clearCookie('access_token');
     res.redirect('/login');
   } catch (error) {
     console.log(error);
   }
-  
+
 }
 
 const logoutFromAll = async (req, res) => {
-  try{
-    await db.Session.update({ session_token : ''},{
+  try {
+    await db.Session.update({ session_token: '' }, {
       where: {
-        session_token : { [Op.ne] : req.user.session_token },
-        user_id : req.user.id
+        session_token: { [Op.ne]: req.user.session_token },
+        user_id: req.user.id
       },
     });
     res.status(200).send({ status: 'ok' });
 
-  }catch(err){
-    res.status(500).send({status : "Internal Server Error", msg: "Unexpected error on server"});
+  } catch (err) {
+    res.status(500).send({ status: "Internal Server Error", msg: "Unexpected error on server" });
     console.log(err);
   }
 }
 
-const logoutDevice = async (req,res) =>{
-  
-  try{
-    const update = await db.Session.update({ session_token : ''},{
+const logoutDevice = async (req, res) => {
+
+  try {
+    const update = await db.Session.update({ session_token: '' }, {
       where: {
-        session_token : req.params.session_token ,
-        user_id : req.user.id
+        session_token: req.params.session_token,
+        user_id: req.user.id
       },
     });
 
-    if(!update[0]){
+    if (!update[0]) {
       return res.status(500).send({ status: 'not Updated' });
     }
 
     res.status(200).send({ status: 'ok' });
 
-  }catch(err){
-    res.status(500).send({status : "Internal Server Error", msg: "Unexpected error on server"});
+  } catch (err) {
+    res.status(500).send({ status: "Internal Server Error", msg: "Unexpected error on server" });
     console.log(err);
   }
 
