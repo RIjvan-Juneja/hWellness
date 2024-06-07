@@ -2,7 +2,6 @@ const { Queue, Worker } = require('bullmq');
 const sendMail = require("../services/sendMail");
 const cron = require('node-cron');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const fs = require('fs');
 const path = require('path');
 const db = require('../models/index');
 
