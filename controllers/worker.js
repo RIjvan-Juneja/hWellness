@@ -54,7 +54,7 @@ async function sendNotfication(task) {
     const date = new Date();
     const currentDate = date.toISOString().split('T')[0]; 
     let { user } = task.data;
-    const { csvFilePath, csvFileName  } = await reportGenerate(user);
+    const { csvFilePath } = await reportGenerate(user);
     await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generatred at ${currentDate}`, null, csvFilePath);
     // fs.unlinkSync(csvFilePath);
 }
@@ -69,7 +69,7 @@ async function getUsers() {
 }
 
 // At 07:00 on every  Sunday.
-const schedule = cron.schedule('* * * * *', async () => {
+const schedule = cron.schedule('0 7 * * 0', async () => {
     const users = await getUsers();
     users.forEach(user => {
         queue.add('user-data', { user });
