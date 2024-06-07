@@ -11,7 +11,7 @@ const connection = {
     port: 6379,
 };
   
-const queue = new Queue('report-generation', { connection: connection });
+const queue = new Queue('user-report', { connection: connection });
 
 const reportGenerate = async (user) => {
     const reportData = await db.Medication.findAll({
@@ -50,12 +50,10 @@ const reportGenerate = async (user) => {
 }
 
 // Define the job processing function
-async function sendNotfication(task) {
-    const date = new Date();
-    const currentDate = date.toISOString().split('T')[0]; 
-    let { user } = task.data;
+async function sendNotfication({ data: { user } }) {
+    const currentDate = new Date().toISOString().split('T')[0];
     const { csvFilePath } = await reportGenerate(user);
-    await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generatred at ${currentDate}`, null, csvFilePath);
+    await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generated at ${currentDate}`, null, csvFilePath);
     // fs.unlinkSync(csvFilePath);
 }
 
@@ -72,7 +70,7 @@ async function getUsers() {
 const schedule = cron.schedule('0 7 * * 0', async () => {
     const users = await getUsers();
     users.forEach(user => {
-        queue.add('user-data', { user });
+        queue.add('user-report', { user });
     });
 });
 
