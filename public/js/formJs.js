@@ -90,12 +90,12 @@ const validations = (formType) => {
     let required = [];
 
     if(formType == 'recurring'){
-        required.push('routing','time','startDate','endDate')
+        required.push('routing','time','startDate','endDate','name')
         if(document.querySelector('#routing').value == 'weekly'){
             required.push('day');
         }
     } else {
-        required.push('otoDate', 'otoTime');
+        required.push('otoDate', 'otoTime','oName');
     }
   
   
