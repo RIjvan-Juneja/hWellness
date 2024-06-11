@@ -16,7 +16,6 @@ app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstra
 app.use('/socket', express.static(path.join(__dirname, "node_modules/socket.io/client-dist")));
 app.use(cookieParser()); 
 app.set('view engine', 'ejs');
-console.log(useRouter);
 app.use(useRouter);
 
 const server = app.listen(PORT, (err)=>{

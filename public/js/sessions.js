@@ -7,7 +7,7 @@ const getImageAndName = (str) =>{
 }
 
 const logoutDevice = async (session_token,tr) =>{
-  const response = await fetch(`/sessions/logout/device/${session_token}`, {
+  const response = await fetch(`/auth/sessions/logout/device/${session_token}`, {
     method: "POST",
   })
   const resData = await response.json();
@@ -23,7 +23,7 @@ const logoutDevice = async (session_token,tr) =>{
 } 
 
 const showSessions = async () => {
-  const response = await fetch("/sessions/api", {
+  const response = await fetch("/panel/sessions/api", {
     method: "POST",
   })
   const resData = await response.json();

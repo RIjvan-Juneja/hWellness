@@ -16,7 +16,7 @@ list.forEach(el => {
 
 document.querySelector("#logoutAll").addEventListener("click", async ()=>{
   try {
-    const response = await fetch('/logout/all', {
+    const response = await fetch('/auth/logout/all', {
         method: 'POST',
         body: ''
     });

@@ -29,7 +29,7 @@ const addMedication = async (formId,formType) => {
         formData.append('form_type', 'recurrence');
     }
     try {
-        const response = await fetch('/medication/api/add', {
+        const response = await fetch('/panel/medication/api/add', {
             method: 'POST',
             body: formData
         });

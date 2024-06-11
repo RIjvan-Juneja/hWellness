@@ -1,5 +1,5 @@
 const showDashboard = async () => {
-  const response = await fetch("/medication/api/list", {
+  const response = await fetch("/panel/medication/api/list", {
     method: "POST",
   })
   const resData = await response.json();

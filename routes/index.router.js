@@ -6,8 +6,8 @@ const panelRoutes = require("./panel.router");
 const router = express.Router();
 
 router.use('/', userRoutes);
-router.use('/', authRoutes);
-router.use('/', panelRoutes)
+router.use('/auth', authRoutes);
+router.use('/panel', panelRoutes)
 
 module.exports = router;
 

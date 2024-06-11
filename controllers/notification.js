@@ -74,7 +74,7 @@ const sendNotification = async () =>{
         <p>medicine Notes : ${medication.notes}</p> </br>
         <img src='${medication.file_path}' width ='250px' /> </br>
         <a href='medicationlog/mark/${data.link}'>  Mark as Done ${data.link}</a>
-        <p>link : http://hwellness/medicationlog/mark/${data.link}</p>
+        <p>link : http://hwellness/panel/medicationlog/mark/${data.link}</p>
       `;
       let userEmail = await getUserEmailById(medication.user_id);
       await sendEmail.sendEmail(userEmail, 'Medication Reminder', `It's time to take your medication.`,html,null);

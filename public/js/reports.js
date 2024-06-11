@@ -1,5 +1,5 @@
 const showReports = async () => {
-  const response = await fetch("/reports/api", {
+  const response = await fetch("/panel/reports/api", {
     method: "POST",
   })
   const resData = await response.json();

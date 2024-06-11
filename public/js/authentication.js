@@ -91,7 +91,7 @@ if(document.querySelector('#signUpBtn')){
       let userData = new URLSearchParams(formData);
       
       try {
-        const response = await fetch('/api/registation', {
+        const response = await fetch('/auth/api/registation', {
           method: 'POST',
           body: userData,
           headers: {
@@ -125,7 +125,7 @@ if(document.querySelector("#signInBtn")){
       let userData = new URLSearchParams(formData);
       
       try {
-        const response = await fetch('/api/login', {
+        const response = await fetch('/auth/api/login', {
           method: 'POST',
           body: userData,
           headers: {
