@@ -4,6 +4,7 @@ const cron = require('node-cron');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const path = require('path');
 const db = require('../models/index');
+const { getUsers } = require("../repositories/user.repository");
 
 const connection = {
     host: '127.0.0.1',
@@ -49,24 +50,17 @@ const reportGenerate = async (user) => {
 }
 
 // Define the job processing function
-async function sendNotfication({ data: { user } }) {
+async function sendNotification({ data: { user } }) {
     const currentDate = new Date().toISOString().split('T')[0];
     const { csvFilePath } = await reportGenerate(user);
     await sendMail.sendEmail(user.email, 'Your Weekly Report', `Your Weekly Report generated at ${currentDate}`, null, csvFilePath);
     // fs.unlinkSync(csvFilePath);
 }
 
-const worker = new Worker('user-report', sendNotfication, { connection: connection });
+new Worker('user-report', sendNotification, { connection: connection });
 
-async function getUsers() {
-    let users = await db.User.findAll({
-        attributes: ['id', 'email']
-    });
-    return users;
-}
-
-// At 07:00 on every  Sunday.
-const schedule = cron.schedule('0 7 * * 0', async () => {
+// At 10:00 on every Monday.
+const schedule = cron.schedule('0 10 * * 1', async () => {
     const users = await getUsers();
     users.forEach(user => {
         queue.add('user-report', { user });

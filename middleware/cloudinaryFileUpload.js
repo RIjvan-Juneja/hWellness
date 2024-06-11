@@ -4,9 +4,9 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const path = require('path');
 
 cloudinary.config({
-  cloud_name: 'dn8qn0rvj',
-  api_key: '311354829934642',
-  api_secret: 'IDXqObaOM7r8FdN3uk5BJUeVEfw'
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
 });
 
 // Multer-Cloudinary storage configuration
@@ -14,7 +14,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'uploads',
-    format: async (req, file) => path.extname(file.originalname).slice(1),
+    format: (req, file) => path.extname(file.originalname).slice(1),
     public_id: (req, file) => file.fieldname + '-' + Date.now()
   }
 });

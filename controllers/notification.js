@@ -3,12 +3,7 @@ const db = require('../models/index');
 const sendEmail = require('../services/sendMail');
 const functions = require("../helpers/functions");
 const { Op } = require('sequelize');
-
-const getUserEmailById = async (userId) => {
-  // Implement logic to fetch user email by userId
-  const user = await db.User.findByPk(userId);
-  return user.email;
-};
+const { getUserEmailById } = require("../repositories/user.repository")
 
 const insertMedicationLog = async (data) =>{
   try {
@@ -22,8 +17,6 @@ const insertMedicationLog = async (data) =>{
     throw error;
   }
 }
-
-// const oneTime 
 
 const sendNotification = async () =>{
   const now = new Date();

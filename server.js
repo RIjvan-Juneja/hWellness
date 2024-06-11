@@ -1,7 +1,7 @@
 const express = require("express");
-const useRouter = require('./routes/router.js');
+const useRouter = require('./routes/index.router.js');
 const path = require('path');
-const socketIo = require("socket.io");
+// const socketIo = require("socket.io");
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || 'localhost';
@@ -15,9 +15,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use('/socket', express.static(path.join(__dirname, "node_modules/socket.io/client-dist")));
 app.use(cookieParser()); 
-app.set('trust proxy', true);
 app.set('view engine', 'ejs');
-app.use("/",useRouter);
+console.log(useRouter);
+app.use(useRouter);
 
 const server = app.listen(PORT, (err)=>{
     if(err){

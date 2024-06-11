@@ -36,6 +36,5 @@ document.querySelector("#logoutAll").addEventListener("click", async ()=>{
 
 
 socket.on('logout_attempt_res', (result) => {
-  console.log("location");
   window.location.reload();
 });	
